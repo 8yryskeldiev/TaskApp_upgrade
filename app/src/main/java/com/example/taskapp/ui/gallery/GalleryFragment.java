@@ -1,6 +1,7 @@
 package com.example.taskapp.ui.gallery;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.taskapp.R;
+import com.example.taskapp.models.Task;
 
 public class GalleryFragment extends Fragment {
+
 
     private GalleryViewModel galleryViewModel;
 

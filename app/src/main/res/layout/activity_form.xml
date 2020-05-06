@@ -10,12 +10,19 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#C3C1C1"
         android:hint="Задача"
-        android:id="@+id/editTitle"/>
+        android:id="@+id/editTitle"
+        android:textSize="22sp"
+        android:layout_marginBottom="12dp"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Описание задачи"
+        android:background="#C3C1C1"
+        android:textSize="22sp"
+        android:layout_marginBottom="12dp"
         android:id="@+id/editDisc"/>
     <Button
         android:layout_width="match_parent"
@@ -24,5 +31,6 @@
         android:id="@+id/save"
         android:onClick="onClick"
        />
+
 
 </LinearLayout>
