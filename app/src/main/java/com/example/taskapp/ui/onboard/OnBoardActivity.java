@@ -7,7 +7,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +22,7 @@ import com.example.taskapp.ui.home.HomeFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class OnBoardActivity extends AppCompatActivity  {
-
+int pos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +35,15 @@ public class OnBoardActivity extends AppCompatActivity  {
     }
 
     public void onClick(View view) {
-        startActivity(new Intent(OnBoardActivity.this, MainActivity.class));
+saveIsShown();
+        Intent intent = new Intent(OnBoardActivity.this, MainActivity.class);
+        startActivity(intent);
         finish();
+
     }
+    private void saveIsShown() {
+        SharedPreferences preferences= getSharedPreferences("setting",MODE_PRIVATE);
+        preferences.edit().putBoolean("isShown",true).apply();}
 
 
     public  class SectionsPagerAdapter extends FragmentPagerAdapter{
@@ -46,8 +55,9 @@ public class OnBoardActivity extends AppCompatActivity  {
         @NonNull
         @Override
         public Fragment getItem(int position) {
+            pos=position;
             Bundle bundle= new Bundle();
-            bundle.putInt("pos",position);
+            bundle.putInt("pos",pos);
             Boardragment fragment= new Boardragment();
             fragment.setArguments(bundle);
             return fragment;

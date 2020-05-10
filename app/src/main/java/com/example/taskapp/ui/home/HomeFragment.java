@@ -33,18 +33,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<Task> list = new ArrayList<>();
 
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        Bundle bundle = this.getArguments();
-//        if (bundle != null) {
-//            task = (Task) bundle.getSerializable("key");
-//            Log.e("tag", "title=" + task.getTitle());
-//            if (task!=null){
-//                list.add(task);
-//            }
-//        }
-//    }
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

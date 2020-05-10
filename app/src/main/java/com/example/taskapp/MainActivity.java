@@ -1,6 +1,8 @@
 package com.example.taskapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.example.taskapp.models.Task;
 import com.example.taskapp.ui.home.HomeFragment;
@@ -17,6 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -32,10 +36,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (true) {
+        if (!isShown()) {
             startActivity(new Intent(MainActivity.this, OnBoardActivity.class));
             finish();
             return;
+
         }
 
         setContentView(R.layout.activity_main);
@@ -49,10 +54,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(new Intent(MainActivity.this, FormActivity.class), 100);
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        View headerView = navigationView.getHeaderView(0);
+        headerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toProfile= new Intent(MainActivity.this,ProfileActivity.class);
+                startActivity(toProfile);
+                finish();
+            }
+        });
+
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
@@ -60,11 +74,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+    }
+    private  boolean isShown(){
+        SharedPreferences preferences=getSharedPreferences("setting", Context.MODE_PRIVATE);
+        return preferences.getBoolean("isShown",false);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -72,15 +91,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         {
-
             int id = item.getItemId();
-
             if (id == R.id.action_exit) {
+                SharedPreferences preferences = getSharedPreferences("setting", Context.MODE_PRIVATE);
+                preferences.edit().putBoolean("isShown", false).apply();
                 finish();
             }
 
         }
         return super.onOptionsItemSelected(item);
+
     }
 
     @Override
