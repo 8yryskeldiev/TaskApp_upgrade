@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
+
+
     private  ArrayList<String>list;
 
     public GalleryAdapter(ArrayList<String> list) {

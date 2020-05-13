@@ -1,6 +1,7 @@
 package com.example.taskapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,24 +9,38 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.taskapp.models.Task;
 
 public class FormActivity extends AppCompatActivity {
 private EditText editTitle;
 private EditText editDisc;
+Task task2;
+    private int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
-       if(getSupportActionBar()!= null){
-           getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-           getSupportActionBar().setDisplayShowHomeEnabled(true);
-           getSupportActionBar().setTitle("Новая задача");
-       }
-        editTitle=findViewById(R.id.editTitle);
-        editDisc=findViewById(R.id.editDisc);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setTitle("Новая задача");
+
+        }
+        editTitle = findViewById(R.id.editTitle);
+        editDisc = findViewById(R.id.editDisc);
+
+
+        Intent intent = getIntent();
+        task2 = (Task) intent.getSerializableExtra("change");
+        if (task2!= null) {
+                editTitle.setText(task2.title);
+                editDisc.setText(task2.desc);
+                position=intent.getIntExtra("position",0);
+        }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -40,9 +55,14 @@ private EditText editDisc;
         String title= editTitle.getText().toString().trim();
         String desc=editDisc.getText().toString().trim();
         Task task= new Task(title,desc);
-        Intent intent=new Intent();
-        intent.putExtra("task",task);
-        setResult(RESULT_OK, intent);
+        if ( task2!= null){
+            task.setId(task2.getId());
+            App.getInstance().getDataBase().taskDao().update(task);
+        } else {
+            App.getInstance().getDataBase().taskDao().insert(task);
+        }
         finish();
     }
+
+
 }

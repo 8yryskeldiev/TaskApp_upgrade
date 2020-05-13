@@ -4,4 +4,5 @@ import com.example.taskapp.models.Task;
 
 public interface OnItemClickListener {
     void  onItemClick(int pos);
+  void  createOneButtonAlertDialog(int pos);
 }
