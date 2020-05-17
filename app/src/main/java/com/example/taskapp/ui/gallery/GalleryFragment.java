@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class GalleryFragment extends Fragment {
     private GalleryAdapter adapter;
     private ArrayList<String> list = new ArrayList<>();
-String text;
+private String text;
 
 
 
@@ -43,13 +43,11 @@ String text;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getPermissions();
-
+   getPermissions();
         RecyclerView recyclerView=view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter= new GalleryAdapter(list);
         recyclerView.setAdapter(adapter);
-
 
 
 
@@ -79,10 +77,8 @@ String text;
         File folder= new File(Environment.getExternalStorageDirectory(),"DCIM/Camera");//привязка EXTERNAL
        // if(!folder.exists())folder.mkdir();//если нет директории то создай директорию.
         for (File file: folder.listFiles()){
-            Log.e("tag","file="+ file.getAbsolutePath());
-             text=file.getAbsolutePath();
-             list.add(text);
-        }
+            list.add(file.getName());
 
+        }
     }
 }

@@ -14,21 +14,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskapp.App;
 import com.example.taskapp.FormActivity;
+import com.example.taskapp.MainActivity;
 import com.example.taskapp.R;
 import com.example.taskapp.models.Task;
 import com.example.taskapp.ui.OnItemClickListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements OnItemClickListener {
 
-    private int position;
+
+private  Task task;
     private TaskAdapter adapter;
     private ArrayList<Task> list = new ArrayList<>();
 
@@ -57,11 +61,13 @@ public class HomeFragment extends Fragment implements OnItemClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView=view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        list.addAll(App.getInstance().getDataBase().taskDao().getAll());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
         adapter= new TaskAdapter(list);
         adapter.listener =this;
         recyclerView.setAdapter(adapter);
+
         loadData();
 
 
@@ -84,9 +90,10 @@ public class HomeFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onItemClick(int pos) {
+        task=list.get(pos);
+
         Intent intent = new Intent(getContext(), FormActivity.class);
-        intent.putExtra("change", list.get(pos));
-        intent.putExtra("position", pos);
+        intent.putExtra("change", task);
         getActivity().startActivity(intent);
 
     }
@@ -113,7 +120,16 @@ public class HomeFragment extends Fragment implements OnItemClickListener {
 
     }
 
+    public void sorting() {
+        list.clear();
+        list.addAll(App.getInstance().getDataBase().taskDao().sort());
+        adapter.notifyDataSetChanged();
+        }
+    public void  back() {
+        list.clear();
+        list.addAll(App.getInstance().getDataBase().taskDao().getAll());
+        adapter.notifyDataSetChanged();
+    }}
 
-}
 
 

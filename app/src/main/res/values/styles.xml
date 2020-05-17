@@ -17,4 +17,20 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="editStyle" >
+    <item name="android:background">@drawable/edit_exemple</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+    <style name="mainBackground">
+        <item name="android:background">@drawable/fon</item>
+    </style>
+    <style name="buttonStyle">
+        <item name="android:background">@drawable/button_exemple</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+
+    </style>
 </resources>

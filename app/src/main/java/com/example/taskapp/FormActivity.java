@@ -53,7 +53,14 @@ Task task2;
 
     public void onClick(View view) {
         String title= editTitle.getText().toString().trim();
+        if(title.isEmpty()){
+            editTitle.setError("Пустое поле");
+                    return;
+        }
         String desc=editDisc.getText().toString().trim();
+        if(desc.isEmpty()){
+            editDisc.setError("Пустое поле");
+            return;}
         Task task= new Task(title,desc);
         if ( task2!= null){
             task.setId(task2.getId());

@@ -1,5 +1,6 @@
 package com.example.taskapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.taskapp.models.Task;
 import com.example.taskapp.ui.home.HomeFragment;
@@ -30,9 +32,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
-    private Task task;
+private  boolean ten;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,20 +94,33 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         {
-            int id = item.getItemId();
-            if (id == R.id.action_exit) {
-                SharedPreferences preferences = getSharedPreferences("setting", Context.MODE_PRIVATE);
-                preferences.edit().putBoolean("isShown", false).apply();
-                finish();
+            switch (item.getItemId()){
+                case R.id.action_exit:
+                    SharedPreferences preferences = getSharedPreferences("setting", Context.MODE_PRIVATE);
+                    preferences.edit().putBoolean("isShown", false).apply();finish();
+                    break;
+                case R.id.action_sort:
+                    if(ten){
+                        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                        ((HomeFragment) fragment.getChildFragmentManager().getFragments().get(0)).sorting();
+                        ten= false;
+                    } else
+                    {Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                        ((HomeFragment) fragment.getChildFragmentManager().getFragments().get(0)).back();
+                        ten=true;
+                    }
+                break;
             }
-
         }
         return super.onOptionsItemSelected(item);
 
     }
+
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -110,19 +129,19 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 100 && data != null) {
-            task = (Task) data.getSerializableExtra("task");
-            Log.e("tag", "title=" + task.getTitle());
-            Log.e("tag", "desc=" + task.getDesc());
-            Fragment homeFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-            homeFragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode,resultCode,data);
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == RESULT_OK && requestCode == 100 && data != null) {
+//            task = (Task) data.getSerializableExtra("task");
+//
 
-
-        }
-    }
+//            Fragment homeFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+//            homeFragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode,resultCode,data);
+//
+//
+//        }
+//    }
 
 }
 

@@ -4,30 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+   style="@style/mainBackground"
     android:orientation="vertical"
     android:padding="16dp"
+
     tools:context=".FormActivity">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#C3C1C1"
-        android:hint="Задача"
+        android:hint="Task"
         android:id="@+id/editTitle"
+        style="@style/editStyle"
         android:textSize="22sp"
+        android:background="@drawable/edit_exemple"
         android:layout_marginBottom="12dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Описание задачи"
-        android:background="#C3C1C1"
+        android:hint="Discription"
+
         android:textSize="22sp"
+        style="@style/editStyle"
         android:layout_marginBottom="12dp"
         android:id="@+id/editDisc"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save"
+      style="@style/buttonStyle"
         android:id="@+id/save"
         android:onClick="onClick"
        />

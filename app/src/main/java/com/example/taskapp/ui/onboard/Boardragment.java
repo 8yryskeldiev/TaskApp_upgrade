@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.taskapp.MainActivity;
 import com.example.taskapp.R;
 
@@ -50,32 +51,25 @@ public class Boardragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView textView=view.findViewById(R.id.fragmentText);
-        ImageView imageView=view.findViewById(R.id.imageView);
         Button button=view.findViewById(R.id.getStarted);
-
+        LottieAnimationView lottieAnimationView=view.findViewById(R.id.animation_view);
         int pos = getArguments().getInt("pos");
         switch (pos){
             case 0:
                 button.setVisibility(View.INVISIBLE);
-               imageView.setImageResource(R.drawable.smile1);
-
                 textView.setText("ПРИВЕТ");
-view.setBackgroundColor(Color.BLUE);
-
+                lottieAnimationView.setAnimation(R.raw.history);
                 break;
             case 1:
                 button.setVisibility(View.INVISIBLE);
-                imageView.setImageResource(R.drawable.smile2);
                 textView.setText("КАК ДЕЛА?");
-                view.setBackgroundColor(Color.RED);
-
+                lottieAnimationView.setAnimation(R.raw.swinging);
                 break;
             case 2:
                 button.setVisibility(View.VISIBLE);
-                imageView.setImageResource(R.drawable.smile3);
                 textView.setText("ЧТО ДЕЛАШЬ?");
-                view.setBackgroundColor(Color.YELLOW);
 
+                lottieAnimationView.setAnimation(R.raw.startupanimations);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

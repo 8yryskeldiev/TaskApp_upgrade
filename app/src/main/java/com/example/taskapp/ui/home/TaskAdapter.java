@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,12 +17,14 @@ import com.example.taskapp.ui.OnItemClickListener;
 
 import java.util.ArrayList;
 
+
+
 public class TaskAdapter extends  RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
   private  ArrayList<Task>list;
      OnItemClickListener listener;
-     Task task;
-    public TaskAdapter(ArrayList<Task> list) {
+
+    public TaskAdapter(final ArrayList<Task> list) {
         this.list = list;
 
     }
@@ -41,8 +44,13 @@ public class TaskAdapter extends  RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 if(position % 2==0) {
-    holder.bind(list.get(position));
-}else {holder.bindTwo(list.get(position));}
+   holder.layout.setBackgroundColor(Color.LTGRAY);
+}else {
+ holder.layout.setBackgroundColor(Color.WHITE);
+}
+
+
+        holder.bind(list.get(position));
 
 
     }
@@ -55,10 +63,14 @@ if(position % 2==0) {
     public  class  ViewHolder extends  RecyclerView.ViewHolder{
 private TextView textTitle;
 OnItemClickListener listener;
+LinearLayout layout;
+private TextView desc;
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
         textTitle=itemView.findViewById(R.id.textTitle);
+        desc=itemView.findViewById(R.id.textDisc);
+        layout=itemView.findViewById(R.id.layout);
         itemView.setOnTouchListener(new View.OnTouchListener(){
             long startTime;
             @Override
@@ -86,15 +98,11 @@ OnItemClickListener listener;
     }
 
         public void bind(Task task) {
-        textTitle.setText(task.getTitle());
-        itemView.setBackgroundColor(Color.LTGRAY);
-
+desc.setText(task.getDesc());
+        textTitle.setText((task.getTitle()));
         }
 
-        public void bindTwo(Task task) {
-            textTitle.setText(task.getTitle());
-            itemView.setBackgroundColor(Color.WHITE);
-        }
+
     }
 
     }

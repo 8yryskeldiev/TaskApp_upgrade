@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/mainBackground"
     android:paddingRight="3dp"
     tools:context=".ui.onboard.OnBoardActivity">
 
@@ -25,6 +26,8 @@
     android:layout_width="wrap_content"
     android:layout_height="40dp"
     android:id="@+id/skip"
+    android:layout_marginTop="4dp"
+    style="@style/buttonStyle"
     android:text="Skip"
     android:onClick="onClick"
     android:layout_alignParentRight="true"
