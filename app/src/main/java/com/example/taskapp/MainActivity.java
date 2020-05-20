@@ -14,11 +14,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.taskapp.logın.PhoneActivity;
 import com.example.taskapp.models.Task;
 import com.example.taskapp.ui.home.HomeFragment;
 import com.example.taskapp.ui.onboard.OnBoardActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +46,13 @@ private  boolean ten;
         super.onCreate(savedInstanceState);
         if (!isShown()) {
             startActivity(new Intent(MainActivity.this, OnBoardActivity.class));
+            finish();
+            return;
+
+        }
+        if(FirebaseAuth.getInstance().getCurrentUser()==null){
+            //Если мы не авторизованы
+            startActivity(new Intent(MainActivity.this, PhoneActivity.class));
             finish();
             return;
 
@@ -114,6 +123,11 @@ private  boolean ten;
                         ten=true;
                     }
                 break;
+                case R.id.action_logout:
+                    FirebaseAuth.getInstance().signOut();
+                    Intent toPhone= new Intent(MainActivity.this,PhoneActivity.class);
+                    startActivity(toPhone);
+                    finish();
             }
         }
         return super.onOptionsItemSelected(item);

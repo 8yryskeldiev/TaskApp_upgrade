@@ -21,6 +21,11 @@
             android:id="@+id/action_sort"
             android:orderInCategory="100"
             android:title="SORT"
-            app:showAsAction="never" />
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/action_logout"
+            android:orderInCategory="100"
+            android:title="LOGOUT"
+            app:showAsAction="always" />
     </group>
 </menu>

@@ -6,24 +6,26 @@
     android:layout_height="match_parent"
    style="@style/mainBackground"
     android:orientation="vertical"
+    android:gravity=""
     android:padding="16dp"
-
     tools:context=".FormActivity">
+
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Task"
+        android:hint="->Task"
         android:id="@+id/editTitle"
         style="@style/editStyle"
+        android:drawableEnd="@drawable/ic_business"
         android:textSize="22sp"
-        android:background="@drawable/edit_exemple"
         android:layout_marginBottom="12dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Discription"
-
+        android:hint="->Discription"
+        android:drawableRight="@drawable/ic_description_black_24dp"
         android:textSize="22sp"
         style="@style/editStyle"
         android:layout_marginBottom="12dp"
@@ -37,5 +39,12 @@
         android:onClick="onClick"
        />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/ic_create"
+        />
 
 </LinearLayout>

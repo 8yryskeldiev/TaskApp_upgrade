@@ -33,4 +33,13 @@
         <item name="android:textColor">#FFFFFFFF</item>
 
     </style>
+
+    <style name="editStyleForPhone" >
+        <item name="android:background">@drawable/edit_text_for_phone</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
 </resources>

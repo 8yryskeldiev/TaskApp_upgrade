@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    style="@style/mainBackground"
+    android:background="@drawable/background"
     tools:context=".ProfileActivity">
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textSize="20dp"
     android:text="This is ProfileActivity"
+    android:textColor="@color/colorWhite"
     android:layout_margin="40dp"/>
 
 </RelativeLayout>
