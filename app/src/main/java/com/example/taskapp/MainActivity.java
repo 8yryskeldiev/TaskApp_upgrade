@@ -50,13 +50,13 @@ private  boolean ten;
             return;
 
         }
-        if(FirebaseAuth.getInstance().getCurrentUser()==null){
-            //Если мы не авторизованы
-            startActivity(new Intent(MainActivity.this, PhoneActivity.class));
-            finish();
-            return;
-
-        }
+//        if(FirebaseAuth.getInstance().getCurrentUser()==null){
+//            //Если мы не авторизованы
+//            startActivity(new Intent(MainActivity.this, PhoneActivity.class));
+//            finish();
+//            return;
+//
+//        }
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);

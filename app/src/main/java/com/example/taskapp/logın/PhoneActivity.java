@@ -59,10 +59,17 @@ callbacks= new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
     @Override
     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
         Log.e("phone","onVerificationCompleted");
-        String code=phoneAuthCredential.getSmsCode();
-        if(code!=null){
-            progressBar.setVisibility(View.GONE);
-        }
+
+        registration.setText("Approval");
+        aicon.setVisibility(View.VISIBLE);
+        abutton.setVisibility(View.VISIBLE);
+        aeditText.setVisibility(View.VISIBLE);
+        ricon.setVisibility(View.GONE);
+        rbutton.setVisibility(View.GONE);
+        reditText.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+
+
     }
     @Override
     public void onVerificationFailed(@NonNull FirebaseException e) {
@@ -78,14 +85,7 @@ callbacks= new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
     }
 
     public void onContinueCkick(View view) {
-       registration.setText("Approval");
-       aicon.setVisibility(View.VISIBLE);
-       abutton.setVisibility(View.VISIBLE);
-       aeditText.setVisibility(View.VISIBLE);
-       ricon.setVisibility(View.GONE);
-       rbutton.setVisibility(View.GONE);
-       reditText.setVisibility(View.GONE);
-       progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
        String phoneNumber=reditText.getText().toString().trim();
         PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber,60, TimeUnit.SECONDS,
                 this, callbacks);
@@ -93,6 +93,7 @@ callbacks= new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
     }
 
     public void onApproveClick(View view) {
+        progressBar.setVisibility(View.VISIBLE);
 String code= aeditText.getText().toString().trim();
 if(code.isEmpty()){
     aeditText.setError("Enter CODE...");
