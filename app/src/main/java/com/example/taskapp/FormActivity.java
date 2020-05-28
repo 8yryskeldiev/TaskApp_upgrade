@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.taskapp.models.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FormActivity extends AppCompatActivity {
 private EditText editTitle;
@@ -68,6 +72,12 @@ Task task2;
         } else {
             App.getInstance().getDataBase().taskDao().insert(task);
         }
+
+        Map<String, Object> map= new HashMap<>(  );
+        map.put("desc",task.getDesc());
+        map.put("title",task.getTitle());
+        FirebaseFirestore.getInstance().collection( "tasks" ).add( map );
+
         finish();
     }
 
