@@ -48,7 +48,7 @@ private String text;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter= new GalleryAdapter(list);
         recyclerView.setAdapter(adapter);
-
+list.add( "SSSSS" );
 
 
     }
@@ -77,7 +77,7 @@ private String text;
         File folder= new File(Environment.getExternalStorageDirectory(),"DCIM/Camera");//привязка EXTERNAL
        // if(!folder.exists())folder.mkdir();//если нет директории то создай директорию.
         for (File file: folder.listFiles()){
-            list.add(file.getName());
+
 
         }
     }

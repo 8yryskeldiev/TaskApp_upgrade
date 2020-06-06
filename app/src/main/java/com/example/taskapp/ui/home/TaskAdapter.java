@@ -61,18 +61,18 @@ if(position % 2==0) {
     }
 
     public  class  ViewHolder extends  RecyclerView.ViewHolder{
-private TextView textTitle;
-OnItemClickListener listener;
-LinearLayout layout;
-private TextView desc;
+                private TextView textTitle;
+                OnItemClickListener listener;
+                LinearLayout layout;
+                private TextView desc;
 
-    public ViewHolder(@NonNull View itemView) {
-        super(itemView);
-        textTitle=itemView.findViewById(R.id.textTitle);
-        desc=itemView.findViewById(R.id.textDisc);
-        layout=itemView.findViewById(R.id.layout);
-        itemView.setOnTouchListener(new View.OnTouchListener(){
-            long startTime;
+                public ViewHolder(@NonNull View itemView) {
+                    super(itemView);
+                    textTitle=itemView.findViewById(R.id.textTitle);
+                    desc=itemView.findViewById(R.id.textDisc);
+                    layout=itemView.findViewById(R.id.layout);
+                    itemView.setOnTouchListener(new View.OnTouchListener(){
+                        long startTime;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {

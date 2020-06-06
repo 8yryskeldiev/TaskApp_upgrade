@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         app:lottie_rawRes="@raw/history"
         app:lottie_loop="true"
+
         app:lottie_autoPlay="true" />
 </LinearLayout>
 

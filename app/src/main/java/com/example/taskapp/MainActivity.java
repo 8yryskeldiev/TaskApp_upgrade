@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -12,15 +13,22 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.taskapp.logın.PhoneActivity;
 import com.example.taskapp.models.Task;
+import com.example.taskapp.models.User;
 import com.example.taskapp.ui.home.HomeFragment;
 import com.example.taskapp.ui.onboard.OnBoardActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +48,9 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 private  boolean ten;
-
+    TextView hname;
+    TextView hnumber;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +69,7 @@ private  boolean ten;
         }
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -80,6 +90,26 @@ private  boolean ten;
                 finish();
             }
         });
+
+ imageView=navigationView.getHeaderView( 0 ).findViewById( R.id.heder_imageView );
+ hname=navigationView.getHeaderView( 0 ).findViewById( R.id.heder_name );
+ hnumber=navigationView.getHeaderView( 0 ).findViewById( R.id.heder_number );
+        FirebaseFirestore.getInstance().collection("users")
+                .document(FirebaseAuth.getInstance().getUid())
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                        if (documentSnapshot.exists()){
+                            User user = documentSnapshot.toObject( User.class);
+                            if (user.getAvatar() != null && user.getName() != null && user.getPhoneNumber()!=null) {
+                                Glide.with( MainActivity.this ).load( user.getAvatar() ).circleCrop().into( imageView );
+                                hname.setText( user.getName() );
+                                hnumber.setText( user.getPhoneNumber() );
+                            }
+                        }
+                    }
+                });
+
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -142,6 +172,7 @@ private  boolean ten;
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
